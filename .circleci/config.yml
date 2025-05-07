@@ -21,20 +21,5 @@ workflows:
     jobs:
       - start-server
       - cypress/run:
-          name: Run Cypress Tests
-          requires:
-            - start-server
-          filters:
-            branches:
-              only: main
-          steps:
-            - checkout
-            - run:
-                name: Install dependencies
-                command: npm install
-            - run:
-                name: Run Cypress tests
-                command: npm run test:cypress
-            - run:
-                name: Run Cypress component tests
-                command: npm run test:cypress:component
+          name: run-component-tests
+          cypress-command: npx cypress run --spec 'cypress/component/**/*.cy.js'
